@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 class WeatherForecast extends Command
 {
@@ -75,7 +76,14 @@ class WeatherForecast extends Command
                     "%\n\u{1F32C} Wind speed - " . $value['windSpeed'] . 'm/s, ' . $value['windDesc'] . "\n\n";
             }
 
-            $this->info($forecastText);
+            // $this->info($forecastText);
+
+            Telegram::sendMessage([
+                'chat_id' => env('TELEGRAM_CHANNEL_ID', ''),
+                'parse_mode' => 'HTML',
+                'disable_web_page_preview' => true,
+                'text' => $forecastText
+            ]);
         } else {
             if ($response->clientError()) {
                 $this->error('Error performing request: ' . $response->getStatusCode());
