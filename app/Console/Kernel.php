@@ -25,6 +25,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        // $schedule->command('weather:forecast')->everyMinute();
+        $schedule->command('weather:forecast')->dailyAt('08:00')->timezone('Europe/Kiev');
+
     }
 
     /**
