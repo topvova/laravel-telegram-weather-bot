@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    // \Illuminate\Support\Facades\Cache::store('redis')->put('Laradock', 'is awesome', 10);
     return view('welcome');
 });
 
